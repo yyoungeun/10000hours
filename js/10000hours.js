@@ -8,18 +8,18 @@ const loading = document.querySelector(".result_loading");
 
 function calculator() {
   const fieldValue = document.querySelector("#field_value");
-  let timeValue = document.querySelector("#time_value");
-  let timeValue_int = Number(timeValue.value);
+  const timeValue = document.querySelector("#time_value");
+  const timeValue_int = Number(timeValue.value);
 
   const fieldResult = document.querySelector(".field_result");
   const timeResult = document.querySelector(".time_result");
 
   if (fieldValue.value == "") {
-    alert("첫 번째 값이 입력되지 않았습니다.");
+    alert("분야가 입력되지 않았습니다.");
     fieldValue.focus();
     return false;
   } else if (timeValue.value == "") {
-    alert("두 번째 갑이 입력되지 않았습니다.");
+    alert("시간이 입력되지 않았습니다.");
     timeValue.focus();
     return false;
   } else if (timeValue_int > 24) {
@@ -30,11 +30,14 @@ function calculator() {
   result.style.display = "none";
   loading.style.display = "flex";
 
+  //결과값을 노출하기 전 결과 값 안에 결과 값을 담아야 한다.
+  //값이 들어간 상태에서 결과 값 노출
+  //값을 UI에 할당하는 부분을 UI가 노출되기 전으로 이동
   setTimeout(function () {
-    loading.style.display = "none";
-    result.style.display = "flex";
     fieldResult.innerText = fieldValue.value;
     timeResult.innerText = parseInt(10000 / timeValue_int, 10);
+    loading.style.display = "none";
+    result.style.display = "flex";
   }, 1800);
 }
 
